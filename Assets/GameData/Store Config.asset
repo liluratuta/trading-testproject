@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eef3d170f9047cdb8ff46d1c6198a0d, type: 3}
+  m_Name: Store Config
+  m_EditorClassIdentifier: 
+  PlayerInventorySize: 19
+  PlayerStartMoneyAmount: 100
+  TraderInventorySize: 14
+  TraderCostMultiplier: 1.5
+  RedBottleCost: 10
+  BlueBottleCost: 12
+  SwordCost: 29
+  BookCost: 58
+  PlayerStartItems:
+  - Id: 1
+    InventoryIndex: 1
+  - Id: 2
+    InventoryIndex: 2
+  - Id: 4
+    InventoryIndex: 14
+  TraderStartItems:
+  - Id: 3
+    InventoryIndex: 3
+  - Id: 3
+    InventoryIndex: 4
+  - Id: 4
+    InventoryIndex: 9
+  - Id: 4
+    InventoryIndex: 12
