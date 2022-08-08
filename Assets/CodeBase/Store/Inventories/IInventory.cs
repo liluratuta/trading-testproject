@@ -10,6 +10,7 @@ namespace CodeBase.Store.Inventories
         event Action<InventorySlot> SlotChanged;
         IEnumerable<InventorySlot> Slots();
         void SetItem(InventorySlot slot, Item item);
+        ItemId GetId(InventorySlot slot);
         Item GetItem(InventorySlot slot);
         bool IsEmptySlot(InventorySlot slot);
         void Remove(InventorySlot slot);

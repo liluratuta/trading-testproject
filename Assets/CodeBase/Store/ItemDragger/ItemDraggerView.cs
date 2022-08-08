@@ -1,4 +1,3 @@
-using CodeBase.Store.Entities;
 using CodeBase.Store.Infrastructure.Providers;
 using CodeBase.Store.Inventories.Slot;
 using CodeBase.Store.Items;
@@ -15,8 +14,8 @@ namespace CodeBase.Store.ItemDragger
             _itemView.Construct(spriteProvider);
         }
         
-        public void Begin(InventorySlot slot, ISeller seller) => 
-            _itemView.Show(slot, seller);
+        public void Begin(ItemId itemId) => 
+            _itemView.Show(itemId);
 
         public void UpdatePosition(Vector2 position) => 
             _itemView.SetPosition(position);

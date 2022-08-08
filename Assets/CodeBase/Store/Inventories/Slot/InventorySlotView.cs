@@ -21,26 +21,29 @@ namespace CodeBase.Store.Inventories.Slot
         private Action<InventorySlot, DragState, Vector2> _onDragging;
         private InventorySlot _slot;
         private IEntity _entity;
+        private IInventory _inventory;
         private bool _isDraggable;
 
         public void Construct(InventorySlot slot, ISpriteProvider spriteProvider,
             Action<InventorySlot, InventorySlot> onAttached,
-            Action<InventorySlot, DragState, Vector2> onDragging, IEntity entity)
+            Action<InventorySlot, DragState, Vector2> onDragging, IEntity entity, IInventory inventory)
         {
             _entity = entity;
             _spriteProvider = spriteProvider;
             _onAttached = onAttached;
             _onDragging = onDragging;
+            _inventory = inventory;
             ChangeSlot(slot);
         }
 
         public void ChangeSlot(InventorySlot slot)
         {
-            _slot = new InventorySlot(_entity, slot.Id, slot.Index);
-            _itemIcon.sprite = _spriteProvider.ForItem(slot.Id);
-            _isDraggable = slot.Id != ItemId.None;
+            _slot = new InventorySlot(_entity, slot.Index);
+            var itemId = _inventory.GetId(slot);
+            _itemIcon.sprite = _spriteProvider.ForItem(itemId);
+            _isDraggable = itemId != ItemId.None;
 
-            _costField.text = slot.Id != ItemId.None ? 
+            _costField.text = itemId != ItemId.None ? 
                 _entity.ItemCost(slot).ToString("F2") : "";
         }
 

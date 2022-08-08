@@ -36,14 +36,14 @@ namespace CodeBase.Store.Inventories
         public void SetItem(ItemId id, int index)
         {
             _items[index] = _itemFactory.Create(id);
-            var newSlot = new InventorySlot(id, index);
+            var newSlot = new InventorySlot(index);
             SlotChanged?.Invoke(newSlot);
         }
         
         public void SetItem(InventorySlot slot, Item item)
         {
             _items[slot.Index] = item;
-            var newSlot = new InventorySlot(item.Id, slot.Index);
+            var newSlot = new InventorySlot(slot.Index);
             SlotChanged?.Invoke(newSlot);
         }
 
@@ -51,12 +51,15 @@ namespace CodeBase.Store.Inventories
             _items[slot.Index];
 
         public bool IsEmptySlot(InventorySlot slot) =>
-            slot.Id == ItemId.None;
+            GetId(slot) == ItemId.None;
+
+        public ItemId GetId(InventorySlot slot) => 
+            _items[slot.Index].Id;
 
         public void Remove(InventorySlot slot)
         {
             _items[slot.Index] = _itemFactory.Create(ItemId.None);
-            var newSlot = new InventorySlot(ItemId.None, slot.Index);
+            var newSlot = new InventorySlot(slot.Index);
             SlotChanged?.Invoke(newSlot);
         }
 
@@ -66,13 +69,13 @@ namespace CodeBase.Store.Inventories
             var secondItem = _items[secondSlot.Index];
 
             _items[secondSlot.Index] = firstItem;
-            SlotChanged?.Invoke(new InventorySlot(firstItem.Id, secondSlot.Index));
+            SlotChanged?.Invoke(new InventorySlot(secondSlot.Index));
 
             _items[firstSlot.Index] = secondItem;
-            SlotChanged?.Invoke(new InventorySlot(secondItem.Id, firstSlot.Index));
+            SlotChanged?.Invoke(new InventorySlot(firstSlot.Index));
         }
 
         private static InventorySlot MakeInventorySlot(Item item, int index) => 
-            new InventorySlot(item?.Id ?? ItemId.None, index);
+            new InventorySlot(index);
     }
 }

@@ -1,4 +1,3 @@
-using CodeBase.Store.Entities;
 using CodeBase.Store.Infrastructure;
 using CodeBase.Store.Infrastructure.Providers;
 using CodeBase.Store.Inventories;
@@ -21,9 +20,9 @@ namespace CodeBase.Store.Items
             _rectTransform = GetComponent<RectTransform>();
         }
 
-        public void Show(InventorySlot inventorySlot, ISeller seller)
+        public void Show(ItemId itemId)
         {
-            _itemIcon.sprite = _spriteProvider.ForItem(inventorySlot.Id);
+            _itemIcon.sprite = _spriteProvider.ForItem(itemId);
             gameObject.SetActive(true);
         }
 

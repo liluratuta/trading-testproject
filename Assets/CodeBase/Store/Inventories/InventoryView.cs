@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using CodeBase.Store.Entities;
-using CodeBase.Store.Infrastructure;
 using CodeBase.Store.Infrastructure.Factories;
 using CodeBase.Store.Infrastructure.Providers;
 using CodeBase.Store.Inventories.Slot;
@@ -42,7 +41,7 @@ namespace CodeBase.Store.Inventories
             foreach (var slot in slots)
             {
                 var slotView = _viewFactory.CreateSlot(container: _slotsContainer);
-                slotView.Construct(slot, _spriteProvider, OnAttached, OnDragging, _entity);
+                slotView.Construct(slot, _spriteProvider, OnAttached, OnDragging, _entity, _inventory);
                 _slotViews.Add(slotView);
             }
         }
@@ -58,7 +57,7 @@ namespace CodeBase.Store.Inventories
 
             if (state == DragState.Begin)
             {
-                _itemDragger.Begin(slot, _entity);
+                _itemDragger.Begin(_inventory.GetId(slot));
                 _slotViews[slot.Index].SetGray(isGray: true);
             }
 
